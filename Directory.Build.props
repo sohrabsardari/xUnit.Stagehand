@@ -1,0 +1,20 @@
+<Project>
+	<PropertyGroup>
+		<MinVerDefaultPreReleasePhase>alpha</MinVerDefaultPreReleasePhase>
+		<MinVerTagPrefix>v</MinVerTagPrefix>
+
+		<Authors>Sohrab Sardari</Authors>
+		<Description>An xUnit extension that allows tests to return values.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/sohrabsardari/xUnit.Stagehand</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/sohrabsardari/xUnit.Stagehand</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MinVer" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+</Project>
