@@ -34,3 +34,29 @@ jobs:
 
     - name: Pack
       run: dotnet pack src/xUnit.Stagehand/xUnit.Stagehand.csproj --configuration Release --no-build -o ./dist
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-package
+        path: ./dist/*.nupkg
+
+  publish:
+    needs: build-and-test
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: nuget-package
+        path: ./dist
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Push to NuGet
+      run: dotnet nuget push "./dist/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
